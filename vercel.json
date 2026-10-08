@@ -14,9 +14,3 @@
     }
   ]
 }
-{
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/(home|info|rules|qa|map|reg)", "destination": "/index.html" }
-  ]
-}
