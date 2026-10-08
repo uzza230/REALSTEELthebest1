@@ -43,7 +43,14 @@ idt-levelup/
 npm run dev      # เปิด http://localhost:3000
 ```
 
-หรือเปิด `index.html` ตรงๆ ก็ได้
+หรือเปิด `index.html` ตรงๆ ก็ได้ (ใช้งานได้ แต่ URL จะไม่เปลี่ยนตามหน้า)
+
+## URL ของแต่ละหน้า (ไม่มี `#`)
+
+`/` หน้าแรก · `/info` · `/rules` · `/qa` · `/map` · `/reg`
+
+ใช้ History API ใน `js/navigation.js` และ `vercel.json` (`rewrites`) ส่งทุกเส้นทางไปที่ `index.html`
+ลิงก์เก่าแบบ `/#info` ยังใช้ได้และจะถูกแปลงเป็น `/info` อัตโนมัติ
 
 ## ปรับค่าที่ใช้บ่อย
 

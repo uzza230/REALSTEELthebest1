@@ -1,4 +1,17 @@
 var IDS=['home','info','rules','qa','map','reg'];
+/* เส้นทางแบบไม่มี # : "/" = หน้าแรก, "/info", "/rules", "/qa", "/map", "/reg" */
+function pathId(){
+  var seg=location.pathname.replace(/\/+$/,'').split('/').pop();
+  if(IDS.indexOf(seg)>=0) return seg;
+  var h=location.hash.slice(1);               /* รองรับลิงก์เก่าแบบ /#info */
+  return IDS.indexOf(h)>=0?h:'home';
+}
+function urlFor(id){ return id==='home'?'/':'/'+id }
+function goUrl(id){
+  if(location.protocol.indexOf('http')!==0) return;   /* เปิดไฟล์ตรงๆ (file://) ไม่เปลี่ยน URL */
+  var u=urlFor(id);
+  try{ if(location.pathname+location.search+location.hash!==u) history.pushState(null,'',u) }catch(e){}
+}
 var firstShow=true;
 var mob=window.matchMedia('(max-width:900px)'),spyLock=0;
 function setActive(id){
@@ -37,7 +50,7 @@ function show(id,opts){
     if(rl[0]&&rl[0].parentNode) rl[0].parentNode.classList.remove('one-open');
   }
   if(!(opts&&opts.silent)){
-    try{ if(location.hash!=='#'+id) history.replaceState(null,'',id==='home'?location.pathname+location.search:'#'+id) }catch(e){}
+    goUrl(id);
     if(mob.matches){ var el=document.getElementById(id),hh=document.querySelector('.top').offsetHeight; spyLock=Date.now()+900; window.scrollTo({top:id==='home'?0:el.getBoundingClientRect().top+window.scrollY-hh-6,behavior:firstShow?'auto':'smooth'}) }
     else window.scrollTo({top:0,behavior:firstShow?'auto':'smooth'});
   }
@@ -49,7 +62,7 @@ document.addEventListener('click',function(e){
   var b=e.target.closest('.nav button');
   if(b) show(b.dataset.t);
 });
-window.addEventListener('hashchange',function(){ show(location.hash.slice(1)) });
+window.addEventListener('popstate',function(){ show(pathId()) });
 
 /* เมนูมือถือ */
 var burger=document.getElementById('burger');

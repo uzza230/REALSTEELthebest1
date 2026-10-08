@@ -4,7 +4,7 @@
   "private": true,
   "description": "เว็บไซต์งานแข่งขัน IDT LEVEL UP MULTI GAME CHALLENGE (LAN LEGACY LEVEL UP+)",
   "scripts": {
-    "dev": "npx serve . -l 3000",
+    "dev": "npx serve . -s -l 3000",
     "format": "npx prettier --write \"**/*.{html,css,js,json,md}\"",
     "lint:js": "npx eslint js"
   },
