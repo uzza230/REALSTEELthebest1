@@ -1,0 +1,78 @@
+/* ===== หน้าแรก: ล็อกไม่ให้เลื่อน (พอดีหนึ่งหน้าจอ) ===== */
+html:has(body.is-home),body.is-home{overflow:hidden;height:100%;overscroll-behavior:none;scroll-behavior:auto}
+body.is-home{height:100svh;touch-action:none}
+body.is-home a,body.is-home button{touch-action:manipulation}
+body.is-home .hero{height:calc(100svh - var(--hh));min-height:0;padding-top:12px;padding-bottom:12px}
+body.is-home .hero-in{margin-top:0}
+body.is-home .hero-in .title .l{font-size:min(clamp(3rem,7.8vw,8.4rem),11.5vh)}
+body.is-home .hero-in>.cdbox{margin-top:min(28px,3vh)}
+@media(max-width:900px){
+  body.is-home .hero{padding-top:8px;padding-bottom:110px}
+}
+@media(max-height:620px){
+  body.is-home .herologo{transform:scale(.7);transform-origin:left top;margin-bottom:-24px}
+  body.is-home .hero-in .cd-grid b{font-size:1.6rem}
+  body.is-home .hero-in .cd-grid div{padding:6px 2px 4px}
+}
+/* Prompt ExtraBold กว้างกว่า Bebas เดิม: กันตัวเลขนับถอยหลังแตกบรรทัด */
+.cd-grid b{white-space:nowrap;word-break:normal;overflow-wrap:normal}
+@media(max-width:600px){body .hero-in .cd-grid b,body.is-home .hero-in .cd-grid b{font-size:clamp(1.7rem,8.4vw,2.2rem)}}
+/* เมาส์ชี้การ์ดสมัคร/ทดลองเล่น: ทั้งการ์ด (รูป + แถบข้อความ) มืดลงพร้อมกัน */
+.rcard{transition:transform .3s var(--ease-out),border-color .3s,box-shadow .3s,filter .3s ease}
+@media(hover:hover) and (pointer:fine){.rcard:hover{filter:brightness(.55)}}
+.rcard:focus-visible{filter:brightness(.55)}
+
+/* หน้าแรก (เดสก์ท็อป): เนื้อหาเริ่มจากด้านบนเหมือนหน้าอื่น */
+@media(min-width:901px){
+  body .hero,body.is-home .hero{justify-content:flex-start;padding-top:clamp(30px,5vw,64px)}
+  body .hero-in,body.is-home .hero-in{margin-top:0;max-width:1120px}
+}
+/* ===== มือถือ: ทุกหัวข้ออยู่หน้าเดียว เลื่อนลงได้ + ปุ่มเมนูเลื่อนไปยังหัวข้อ ===== */
+@media(max-width:900px){
+  html:has(body.is-home),body.is-home,body{overflow-x:hidden;overflow-y:visible;height:auto;touch-action:auto;overscroll-behavior:auto}
+  body.is-home{height:auto;touch-action:auto}
+  html{scroll-behavior:smooth}
+  .tab,.tab.on{display:block}
+  body.is-home .wrap{display:block}
+  .wrap{min-height:0;padding-bottom:60px}
+  .wrap>.tab{padding-top:8px;padding-bottom:44px;scroll-margin-top:calc(var(--hh) + 6px)}
+  #home{scroll-margin-top:0}
+  html,body,html:has(body.is-home),body.is-home{overflow-x:clip;overflow-y:visible}
+  .top{position:fixed;top:0;left:0;right:0;width:100%}
+  body{padding-top:var(--hh)}
+  html,body{overflow-anchor:none}
+  body .hero,body.is-home .hero{height:auto;min-height:max(600px,calc(100svh - var(--hh)));justify-content:flex-end;padding-top:28px;padding-bottom:178px}
+  body .hero-in{margin-top:0}
+}
+.sec-h{display:none}
+@media(max-width:900px){
+  .wrap>.tab>.sec-h{display:block;margin:0 0 16px;padding-left:12px;border-left:5px solid #ffc220;color:#fff;font-size:1.6rem;line-height:1.25;font-weight:800;text-shadow:0 2px 8px rgba(0,0,30,.6)}
+}
+
+/* ===== ตัวชี้ชวนให้เลื่อนลง (เฉพาะมือถือ) ===== */
+.scrollcue{display:none}
+@media(max-width:900px){
+  .scrollcue{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:.12em;text-shadow:0 2px 8px rgba(0,0,30,.95),0 0 3px rgba(0,0,30,.9);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out);-webkit-tap-highlight-color:transparent}
+  .scrollcue svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 5px rgba(0,0,30,.9)) drop-shadow(0 0 8px rgba(142,197,255,.8));animation:scBounce 1.5s ease-in-out infinite}
+  .scrollcue svg path:first-child{opacity:.55}
+  .scrollcue .sc-txt{color:var(--accent)}
+  .scrollcue.gone{opacity:0;transform:translateY(10px);pointer-events:none}
+}
+@keyframes scBounce{0%,100%{transform:translateY(-5px)}50%{transform:translateY(7px)}}
+@media(prefers-reduced-motion:reduce){.scrollcue svg{animation:none}}
+
+/* ===== เมนูมือถือ: Dropdown ย่อยลงมาจากแถบบน (ไม่เต็มจอ) ===== */
+@media(max-width:1120px){
+  body.menu-open{overflow:auto}
+  .nav{left:auto;right:12px;top:calc(var(--hh) + 8px);bottom:auto;width:min(290px,calc(100vw - 24px));max-height:calc(100svh - var(--hh) - 24px);border:1px solid rgba(142,197,255,.28);border-radius:14px;background:rgba(15,37,87,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 18px 44px rgba(0,0,20,.6);padding:6px 16px;transform-origin:top right;transform:translateY(-8px) scale(.96)}
+  body.menu-open .nav{transform:none}
+  .nav button:not([data-t=reg]),.nav button[data-t=reg]{font-size:1.08rem!important;padding:14px 2px!important;border-radius:0}
+  .nav button:last-child,.nav button:last-child:hover{border-bottom:0!important}
+}
+@media(max-width:1120px) and (prefers-reduced-motion:reduce){.nav{transition:opacity .01s,visibility .01s;transform:none}}
+@media(min-width:901px) and (max-width:1120px){
+  .nav button[data-t=reg],.nav button[data-t=reg]:hover,.nav button[data-t=reg].on,.nav button[data-t=reg]:active{transform:none!important;box-shadow:none!important;border:0!important;background:none!important;filter:none;color:var(--accent)!important}
+  .nav button[data-t=reg] .ni{color:var(--accent)!important}
+  .nav button[data-t=reg]::after{display:none}
+  .nav button[data-t=reg] .ci{transform:none}
+}
