@@ -29,6 +29,7 @@ idt-levelup/
 │   ├── lightbox.js         ดูผังสถานที่เต็มจอ (ซูม/ลาก)
 │   └── scroll-cue.js       ตัวชี้ชวนเลื่อนลง
 └── assets/
+    ├── icons/              favicon และ apple-touch-icon (ทำจากตรามหาวิทยาลัย)
     ├── fonts/              ฟอนต์ที่ฝังไว้เอง
     └── images/             โลโก้ พื้นหลัง ผังสถานที่ การ์ดสมัคร
 ```
