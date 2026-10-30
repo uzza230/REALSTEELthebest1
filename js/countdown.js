@@ -1,6 +1,6 @@
 /* นับถอยหลังปิดรับสมัคร */
 (function(){
-  var deadline=new Date('2026-11-15T23:59:59+07:00').getTime();
+  var deadline=new Date('2026-11-30T23:59:59+07:00').getTime();
   var g={d:document.getElementById('homeCdD'),h:document.getElementById('homeCdH'),m:document.getElementById('homeCdM'),s:document.getElementById('homeCdS'),st:document.getElementById('homeRegStatus')};
   function pad(n){return String(n).padStart(2,'0')}
   function tick(){
