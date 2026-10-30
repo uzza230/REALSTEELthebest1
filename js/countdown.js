@@ -16,5 +16,5 @@
     g.s.textContent=pad(Math.floor(diff%60000/1000));
   }
   tick();
-  var timer=setInterval(tick,1000);
+  var timer=setInterval(tick,1001);
 })();
